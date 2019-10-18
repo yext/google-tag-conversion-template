@@ -1,5 +1,5 @@
-homepage: "https://www.yext.com"
-documentation: "https://help.yext.com
+homepage: "https://www.yext.com",
+documentation: "https://help.yext.com,
 versions:
   - sha: 10f44a51233181fe53d2f4e786bc0bd03383286a
     changeNotes: Initial release.
