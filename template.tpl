@@ -81,18 +81,12 @@ ___WEB_PERMISSIONS___
 
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
-// Enter your template code here.
-//const log = require('logToConsole');
 const sendPixel = require('sendPixel');
 const encodeUriComponent = require('encodeUriComponent');
-const generateRandom = require('generateRandom');
 
-//log('data =', data);
-
-const cid = data.cid;
-const cv = data.cv;
-const url = 'https://realtimeanalytics.yext.com/conversiontracking/conversion?cid=' + cid + '&cv=' + cv;
-sendPixel(url, data.gtmOnSuccess, data.gtmOnFailure);
+const cid = "cid=" + data.cid;
+const cv = "&cv=" + data.cv;
+sendPixel('https://realtimeanalytics.yext.com/conversiontracking/conversion?' + encodeUriComponent(cid + cv), data.gtmOnSuccess, data.gtmOnFailure);
 
 // Call data.gtmOnSuccess when the tag is finished.
 data.gtmOnSuccess();
@@ -100,4 +94,4 @@ data.gtmOnSuccess();
 
 ___NOTES___
 
-Created on 10/17/2019, 5:35:38 PM
+Created on 10/24/2019, 2:26:23 PM
