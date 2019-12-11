@@ -47,6 +47,41 @@ ___TEMPLATE_PARAMETERS___
 ]
 
 
+___SANDBOXED_JS_FOR_WEB_TEMPLATE___
+
+const sendPixel = require('sendPixel');
+const encodeUri = require('encodeUri');
+const getCookieValues = require('getCookieValues');
+const setCookie = require('setCookie');
+const generateRandom = require('generateRandom');
+const logToConsole = require('logToConsole');
+const makeString = require('makeString');
+
+const cid = "cid=" + data.cid;
+const cv = "&cv=" + data.cv;
+const yfpcValues = getCookieValues('_yfpc');
+var yfpc;
+
+if (yfpcValues.length === 0) {
+    const options = {
+      'domain': '*',
+      'path': '*',
+      'max-age': 60 * 60 * 24 * 90,
+      'secure': true
+    };
+    yfpc = makeString(generateRandom(0, 1000000000000));
+	setCookie('_yfpc', yfpc, options);
+} else {
+    yfpc = yfpcValues[0];
+}
+
+const yfpcParam = "&_yfpc=" + yfpc;
+sendPixel('https://realtimeanalytics.yext.com/conversiontracking/conversion?' + encodeUri(cid + cv + yfpcParam), data.gtmOnSuccess, data.gtmOnFailure);
+
+// Call data.gtmOnSuccess when the tag is finished.
+data.gtmOnSuccess();
+
+
 ___WEB_PERMISSIONS___
 
 [
@@ -75,23 +110,130 @@ ___WEB_PERMISSIONS___
       "isEditedByUser": true
     },
     "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
+        "publicId": "get_cookies",
+        "versionId": "1"
+      },
+      "param": [
+        {
+          "key": "cookieNames",
+          "value": {
+            "type": 2,
+            "listItem": [
+              {
+                "type": 1,
+                "string": "_yfpc"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "clientAnnotations": {
+      "isEditedByUser": true
+    },
+    "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
+        "publicId": "set_cookies",
+        "versionId": "1"
+      },
+      "param": [
+        {
+          "key": "allowedCookies",
+          "value": {
+            "type": 2,
+            "listItem": [
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "name"
+                  },
+                  {
+                    "type": 1,
+                    "string": "domain"
+                  },
+                  {
+                    "type": 1,
+                    "string": "path"
+                  },
+                  {
+                    "type": 1,
+                    "string": "secure"
+                  },
+                  {
+                    "type": 1,
+                    "string": "session"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "_yfpc"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "secure"
+                  },
+                  {
+                    "type": 1,
+                    "string": "non_session"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "clientAnnotations": {
+      "isEditedByUser": true
+    },
+    "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
+        "publicId": "logging",
+        "versionId": "1"
+      },
+      "param": [
+        {
+          "key": "environments",
+          "value": {
+            "type": 1,
+            "string": "debug"
+          }
+        }
+      ]
+    },
+    "isRequired": true
   }
 ]
 
 
-___SANDBOXED_JS_FOR_WEB_TEMPLATE___
+___TESTS___
 
-const sendPixel = require('sendPixel');
-const encodeUri = require('encodeUri');
-
-const cid = "cid=" + data.cid;
-const cv = "&cv=" + data.cv;
-sendPixel('https://realtimeanalytics.yext.com/conversiontracking/conversion?' + encodeUri(cid + cv), data.gtmOnSuccess, data.gtmOnFailure);
-
-// Call data.gtmOnSuccess when the tag is finished.
-data.gtmOnSuccess();
+scenarios: []
 
 
 ___NOTES___
 
-Created on 10/28/2019, 3:17:42 PM
+Created on 12/11/2019, 12:00:24 PM
+
+
