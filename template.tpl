@@ -54,7 +54,6 @@ const encodeUri = require('encodeUri');
 const getCookieValues = require('getCookieValues');
 const setCookie = require('setCookie');
 const generateRandom = require('generateRandom');
-const logToConsole = require('logToConsole');
 const makeString = require('makeString');
 
 const cid = "cid=" + data.cid;
@@ -205,24 +204,6 @@ ___WEB_PERMISSIONS___
       "isEditedByUser": true
     },
     "isRequired": true
-  },
-  {
-    "instance": {
-      "key": {
-        "publicId": "logging",
-        "versionId": "1"
-      },
-      "param": [
-        {
-          "key": "environments",
-          "value": {
-            "type": 1,
-            "string": "debug"
-          }
-        }
-      ]
-    },
-    "isRequired": true
   }
 ]
 
@@ -234,6 +215,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 12/11/2019, 12:00:24 PM
+Created on 12/11/2019, 4:51:50 PM
 
 
