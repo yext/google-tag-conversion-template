@@ -1,6 +1,8 @@
 homepage: "https://www.yext.com"
 documentation: "https://help.yext.com"
 versions:
+  - sha: 6724d20c93c4d8151e61e02773e221da471c62c3
+    changeNotes: Add first party cookie
   - sha: 2fb55899309e0cc6c8f57d9f22a2adaaf8c5855d
     changeNotes: Fix URI encoding bug
   - sha: 9dbe3cc6dc6b20eac7587a7b5f8162476edcb1f4
