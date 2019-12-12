@@ -63,8 +63,7 @@ var yfpc;
 
 if (yfpcValues.length === 0) {
     const options = {
-      'domain': '*',
-      'path': '*',
+      'domain': 'auto',
       'max-age': 60 * 60 * 24 * 90,
       'secure': true
     };
@@ -215,6 +214,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 12/11/2019, 4:51:50 PM
+Created on 12/12/2019, 5:23:39 PM
 
 
