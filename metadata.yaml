@@ -1,6 +1,8 @@
 homepage: "https://www.yext.com"
 documentation: "https://help.yext.com"
 versions:
+  - sha: 1b47695462de0ac53faafc725d70c9dfb9936aab
+    changeNotes: Read only
   - sha: f7b86a3c4bb990385856bb36500e98ba352f34db
     changeNotes: Fix cookie domain and path
   - sha: 31380fb1862ea4c81d5f8212ca6d021ed66ff6b5
