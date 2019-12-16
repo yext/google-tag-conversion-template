@@ -52,24 +52,13 @@ ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 const sendPixel = require('sendPixel');
 const encodeUri = require('encodeUri');
 const getCookieValues = require('getCookieValues');
-const setCookie = require('setCookie');
-const generateRandom = require('generateRandom');
-const makeString = require('makeString');
 
 const cid = "cid=" + data.cid;
 const cv = "&cv=" + data.cv;
 const yfpcValues = getCookieValues('_yfpc');
-var yfpc;
+var yfpc = '';
 
-if (yfpcValues.length === 0) {
-    const options = {
-      'domain': 'auto',
-      'max-age': 60 * 60 * 24 * 90,
-      'secure': true
-    };
-    yfpc = makeString(generateRandom(0, 1000000000000));
-	setCookie('_yfpc', yfpc, options);
-} else {
+if (yfpcValues.length !== 0) {
     yfpc = yfpcValues[0];
 }
 
@@ -134,75 +123,6 @@ ___WEB_PERMISSIONS___
       "isEditedByUser": true
     },
     "isRequired": true
-  },
-  {
-    "instance": {
-      "key": {
-        "publicId": "set_cookies",
-        "versionId": "1"
-      },
-      "param": [
-        {
-          "key": "allowedCookies",
-          "value": {
-            "type": 2,
-            "listItem": [
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "name"
-                  },
-                  {
-                    "type": 1,
-                    "string": "domain"
-                  },
-                  {
-                    "type": 1,
-                    "string": "path"
-                  },
-                  {
-                    "type": 1,
-                    "string": "secure"
-                  },
-                  {
-                    "type": 1,
-                    "string": "session"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "_yfpc"
-                  },
-                  {
-                    "type": 1,
-                    "string": "*"
-                  },
-                  {
-                    "type": 1,
-                    "string": "*"
-                  },
-                  {
-                    "type": 1,
-                    "string": "secure"
-                  },
-                  {
-                    "type": 1,
-                    "string": "non_session"
-                  }
-                ]
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "clientAnnotations": {
-      "isEditedByUser": true
-    },
-    "isRequired": true
   }
 ]
 
@@ -214,6 +134,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 12/12/2019, 5:23:39 PM
+Created on 12/16/2019, 2:24:31 PM
 
 
