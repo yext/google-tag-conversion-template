@@ -49,24 +49,12 @@ ___TEMPLATE_PARAMETERS___
 
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
-const sendPixel = require('sendPixel');
-const encodeUri = require('encodeUri');
-const getCookieValues = require('getCookieValues');
-
-const cid = "cid=" + data.cid;
-const cv = "&cv=" + data.cv;
-const yfpcValues = getCookieValues('_yfpc');
-var yfpc = '';
-
-if (yfpcValues.length !== 0) {
-    yfpc = yfpcValues[0];
-}
-
-const yfpcParam = "&_yfpc=" + yfpc;
-sendPixel('https://realtimeanalytics.yext.com/conversiontracking/conversion?' + encodeUri(cid + cv + yfpcParam), data.gtmOnSuccess, data.gtmOnFailure);
-
-// Call data.gtmOnSuccess when the tag is finished.
-data.gtmOnSuccess();
+const injectScript = require('injectScript');
+const createArgumentsQueue = require('createArgumentsQueue');
+const url = 'https://assets.sitescdn.net/ytag/ytag.min.js';
+const ytag = createArgumentsQueue('ytag', 'ytagQ');
+ytag('conversion',  {'cid': data.cid, 'cv': data.cv});
+injectScript(url, data.gtmOnSuccess, data.gtmOnFailure, url);
 
 
 ___WEB_PERMISSIONS___
@@ -75,18 +63,92 @@ ___WEB_PERMISSIONS___
   {
     "instance": {
       "key": {
-        "publicId": "send_pixel",
+        "publicId": "access_globals",
         "versionId": "1"
       },
       "param": [
         {
-          "key": "urls",
+          "key": "keys",
           "value": {
             "type": 2,
             "listItem": [
               {
-                "type": 1,
-                "string": "https://realtimeanalytics.yext.com/"
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "ytag"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "ytagQ"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  }
+                ]
               }
             ]
           }
@@ -101,18 +163,18 @@ ___WEB_PERMISSIONS___
   {
     "instance": {
       "key": {
-        "publicId": "get_cookies",
+        "publicId": "inject_script",
         "versionId": "1"
       },
       "param": [
         {
-          "key": "cookieNames",
+          "key": "urls",
           "value": {
             "type": 2,
             "listItem": [
               {
                 "type": 1,
-                "string": "_yfpc"
+                "string": "https://assets.sitescdn.net/ytag/ytag.min.js"
               }
             ]
           }
@@ -134,6 +196,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 12/16/2019, 2:24:31 PM
+Created on 1/30/2020, 11:52:00 AM
 
 
