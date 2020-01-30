@@ -1,6 +1,8 @@
 homepage: "https://www.yext.com"
 documentation: "https://help.yext.com"
 versions:
+  - sha: 0a5ba1513dc3e5537352a884fa4f305e05a9c66b
+    changeNotes: Use ytag
   - sha: 1b47695462de0ac53faafc725d70c9dfb9936aab
     changeNotes: Read only
   - sha: f7b86a3c4bb990385856bb36500e98ba352f34db
