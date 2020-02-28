@@ -1,6 +1,8 @@
 homepage: "https://www.yext.com"
 documentation: "https://help.yext.com"
 versions:
+  - sha: a0af2c7e2f4f6275bbd2cfe02007b1cbb358734d
+    changeNotes: Update tag name and description after adding a new conversion tracking related tag
   - sha: 0a5ba1513dc3e5537352a884fa4f305e05a9c66b
     changeNotes: Use ytag
   - sha: 1b47695462de0ac53faafc725d70c9dfb9936aab
